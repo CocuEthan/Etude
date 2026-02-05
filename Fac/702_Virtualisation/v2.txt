@@ -1,0 +1,89 @@
+nous reprenons les fichier de config de la v1
+
+Étape 1 : Préparation du dossier v2
+Nous n'allons pas réinventer la roue. Nous allons récupérer tout ce qui fonctionnait dans la v1 (le Dockerfile corrigé, les binaires, les libs) et les copier dans la v2.
+
+Exécutez ces commandes sur le manager :
+
+Bash
+
+# 1. Aller dans le dossier v2
+cd ~/projet/v2
+
+# 2. Copier les fichiers binaires et bibliothèques depuis le dossier parent (ou v1)
+# Assurez-vous que ces fichiers sont présents dans v2
+cp ../v1/geonet .
+cp ../v1/buscom .
+cp ../v1/libasnd.so .
+cp ../v1/libbuscomd.so .
+
+# 3. Copier le Dockerfile corrigé de la v1 (celui qui marche !)
+cp ../v1/Dockerfile .
+
+# 4. Copier le dossier de configuration de la v1 pour avoir une base saine
+cp -r ../v1/config .
+# Créer le dossier logs
+mkdir logs
+Étape 2 : Création du fichier compose.yml
+C'est la nouveauté. Ce fichier va décrire nos deux services. Créez le fichier compose.yml (ou docker-compose.yml) dans le dossier v2.
+
+Bash
+
+nano compose.yml
+Collez ce contenu :
+
+YAML
+services:
+  buscom:
+    build: .
+    container_name: buscom_v2
+    user: utilisateur
+    command: /usr/bin/buscom
+    volumes:
+      - ./config:/etc/its/config
+    expose:
+      - "2775"
+    tty: true
+
+  geonet:
+    build: .
+    container_name: geonet_v2
+    privileged: true
+    depends_on:
+      - buscom
+    command: sh -c "rm -f /tmp/geonet.lock && /usr/sbin/geonet -fnmlt"
+    volumes:
+      - ./config:/etc/its/config
+      - ./logs:/var/log/its
+Sauvegardez et quittez.
+
+Étape 3 : Modification de la configuration (buscom.json)
+C'est le point critique.
+
+Dans la V1, geonet et buscom étaient sur la même machine (localhost).
+
+Dans la V2, ils sont sur deux machines différentes. geonet doit savoir qu'il doit envoyer ses messages à la machine nommée buscom (le nom du service dans le compose).
+
+D'après vos notes (702.txt), il semble qu'il faille spécifier l'IP ou l'hôte.
+
+Ouvrez le fichier :
+
+Bash
+
+nano config/buscom.json
+Modifiez-le pour ajouter l'adresse cible. Docker résoudra automatiquement le nom "buscom" vers l'IP du conteneur buscom.
+
+JSON
+
+{
+    "port": 2775,
+    "ip": "buscom"
+}
+
+
+Maintenans nous pouvons lancé le build 
+sudo docker compose up --build -d
+
+afficher le retour de buscom: sudo docker compose logs -f buscom
+
+arreter le docker proprement: sudo docker compose down

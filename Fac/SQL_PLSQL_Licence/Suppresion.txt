@@ -1,0 +1,23 @@
+-- Suppression des tables dans l'ordre approprié pour gérer les contraintes d'intégrité 
+
+-- Suppression des tables de relations 
+DROP TABLE Contacte CASCADE CONSTRAINTS;
+DROP TABLE Se_Sent_Capable CASCADE CONSTRAINTS;
+DROP TABLE Depend CASCADE CONSTRAINTS;
+DROP TABLE A_recu CASCADE CONSTRAINTS;
+DROP TABLE Habite CASCADE CONSTRAINTS;
+DROP TABLE Se_Situe CASCADE CONSTRAINTS;
+DROP TABLE Localise CASCADE CONSTRAINTS;
+
+-- Suppression des tables principales liées aux candidats et étudiants
+DROP TABLE Mission CASCADE CONSTRAINTS;
+DROP TABLE Candidat CASCADE CONSTRAINTS;
+DROP TABLE Etudiant CASCADE CONSTRAINTS;
+
+-- Suppression des tables de base
+DROP TABLE Personne CASCADE CONSTRAINTS;
+DROP TABLE Fonction CASCADE CONSTRAINTS;
+DROP TABLE Entreprise CASCADE CONSTRAINTS;
+DROP TABLE Institut CASCADE CONSTRAINTS;
+DROP TABLE Diplome CASCADE CONSTRAINTS;
+DROP TABLE Localisation CASCADE CONSTRAINTS;

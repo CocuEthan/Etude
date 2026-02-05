@@ -1,0 +1,63 @@
+CREATE OR REPLACE VIEW vue_risque AS
+-- Carte 1 : Risque Diabète
+SELECT 
+    ID,
+    'Risque Diabète' as titre,
+    risque_diabete   as valeur,
+    'fa fa-cube'     as icone,
+    CASE 
+        WHEN risque_diabete IN ('Très Élevé', 'Élevé') THEN 'u-danger-text' -- Rouge
+        WHEN risque_diabete = 'Modéré'                 THEN 'u-warning-text' -- Orange
+        ELSE 'u-success-text'                                                -- Vert
+    END as css_class,
+    1 as ordre_affichage
+FROM vue_diagnostic
+
+UNION ALL
+
+-- Carte 2 : Santé Cardiaque
+SELECT 
+    ID,
+    'Santé Cardiaque',
+    sante_cardio,
+    'fa fa-heartbeat',
+    CASE 
+        WHEN sante_cardio = 'Critique'     THEN 'u-danger-text'
+        WHEN sante_cardio = 'À surveiller' THEN 'u-warning-text'
+        ELSE 'u-success-text'
+    END,
+    2
+FROM vue_diagnostic
+
+UNION ALL
+
+-- Carte 3 : Poids / IMC
+SELECT 
+    ID,
+    'Statut Pondéral',
+    etat_obesite,
+    'fa fa-user',
+    CASE 
+        WHEN etat_obesite = 'Obésité'  THEN 'u-danger-text'
+        WHEN etat_obesite = 'Surpoids' THEN 'u-warning-text'
+        WHEN etat_obesite = 'Maigreur' THEN 'u-warning-text'
+        ELSE 'u-success-text'
+    END,
+    3
+FROM vue_diagnostic
+
+UNION ALL
+
+-- Carte 4 : Protéines
+SELECT 
+    ID,
+    'Protéines',
+    analyse_proteine,
+    'fa fa-cutlery',
+    CASE 
+        WHEN analyse_proteine LIKE 'Carence%' THEN 'u-info-text' -- Bleu
+        WHEN analyse_proteine LIKE 'Excès%'   THEN 'u-warning-text'
+        ELSE 'u-normal-text'
+    END,
+    4
+FROM vue_diagnostic;

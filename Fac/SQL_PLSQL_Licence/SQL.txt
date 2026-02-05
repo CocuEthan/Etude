@@ -1,0 +1,45 @@
+SQL:
+	Langage diffusion de données
+	manipulation de données
+	Contrôle de données
+
+Sleclt <liste d'attribut [AS]>
+ From <liste des relation [AS]>
+ Join… on <critère de jointure>
+ Where <critère de redirection>
+  Group By <liste d'attribut de groupement>
+   Having <critère de reduction sur le regroupement>
+    Order By <ordre des attribut dans le tableau de sortit>
+
+PAs de relation d'ordre en algèbre relationnels
+
+ Vehicule (NumImmat, Modele, Marque, Couleur, PuissFisc, #NumAgenceProp)
+• Agence (NumAg, NomAg, AdresseAg, VilleAg, TelAg)
+• Locataire(NumLoc, NomLoc, PrénomLoc, AdresseLoc,VilleLoc, TelLoc)
+• Loue(NumLoc,NumImmat,NumAg,DateDebutL,DuréeL)
+• Assurance(NumAs, NomAs,AdresseAs,VilleAs, TelAs)
+• Assure(NumImmat,NumAg,NumAs,DateDebutA,DureeA)
+
+1)Liste des Renault Rouge
+SELECT * FROM Vehicule WHILE Marque Like 'Renault' AND Couleur like 'Rouge'
+
+2) Le nom des locataire d'une corsa verte de plus de 7 ch fiscaux
+
+SELECT NomLoc FROM location JOIN LOUE ON Locataire Nloc =Loue NLoc JOIN Vehicule AS V ON 
+Loue Nimmat = V.Nimmat  Where V modele like 'corsa' AND V.couleur like 'vert' AND V.PuisFisc > 7
+
+OU
+
+SELECT NomLoc From Locataire Where Nloc IN (Select Nloc From Loue 
+	Where Nimmat IN (Select Nimmat From vehicule Modele like 'corsa' AND Couleur like 'vert' AND PuisFisc > 7 ))
+
+3) Donner pour chaque Vehicule, le nombre de fois que celui-ci a été loué
+
+Select Nimmat, Count(*) From loue Group By NImmat 
+
+4)Les locataire qui loues tous les véhicule de type corsa rouge de puisfusc >8
+
+Select NLoc from LOue where NOt Exists(
+	Select Nimat from Vehicule Where MOdele LIke 'Corsa' AND couleur like 'ROuge' AND puisFisc >8 Not Exists
+		(Select Nloc , N immat from loue where L1.Nloc = Loue.Nloc And N.Immat = loue.immat
+

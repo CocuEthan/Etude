@@ -1,0 +1,149 @@
+CREATE TABLE Diplome (
+   Id_Diplome INT,
+   Nom_Diplome VARCHAR2(50),
+   Correspondance VARCHAR2(50),
+   PRIMARY KEY(Id_Diplome)
+);
+
+CREATE TABLE Entreprise (
+   Id_Entreprise INT,
+   Nom_Entreprise VARCHAR2(50),
+   Activite VARCHAR2(200),
+   Cliente NUMBER(1), 
+   NB_Mission_Propose INT,
+   Telepone_Entreprise VARCHAR2(50),
+   Mail_Entreprise VARCHAR2(50),
+   PRIMARY KEY(Id_Entreprise)
+);
+
+CREATE TABLE Institut (
+   Id_Institut INT,
+   Nom_Institut VARCHAR2(50),
+   Categorie VARCHAR2(100),
+   PRIMARY KEY(Id_Institut)
+);
+
+CREATE TABLE Localisation (
+   Id_Localisation INT,
+   Pays VARCHAR2(50),
+   Ville VARCHAR2(50),
+   Adresse VARCHAR2(200),
+   Code_Postal VARCHAR2(50),
+   PRIMARY KEY(Id_Localisation)
+);
+
+CREATE TABLE Fonction (
+   Id_Fonction INT,
+   Nom_Fonction VARCHAR2(50),
+   PRIMARY KEY(Id_Fonction)
+);
+
+CREATE TABLE Mission (
+   Id_Mission INT,
+   Salaire FLOAT,
+   Contrat VARCHAR2(50),
+   Ouverture DATE,
+   Intitule VARCHAR2(500),
+   Dure VARCHAR2(50),
+   Id_Fonction INT NOT NULL,
+   Id_Entreprise INT NOT NULL,
+   PRIMARY KEY(Id_Mission),
+   FOREIGN KEY(Id_Fonction) REFERENCES Fonction(Id_Fonction),
+   FOREIGN KEY(Id_Entreprise) REFERENCES Entreprise(Id_Entreprise)
+);
+
+CREATE TABLE Personne (
+   Id_Personne INT,
+   Nom_Personne VARCHAR2(150),
+   Prenom_Personne VARCHAR2(150),
+   Mail_Personne VARCHAR2(100),
+   Telephone_Personne VARCHAR2(10),
+   Mobile NUMBER(1), 
+   Situation VARCHAR2(50),
+   Age NUMBER(3),
+   Sexe VARCHAR2(50),
+   PRIMARY KEY(Id_Personne)
+);
+
+CREATE TABLE Etudiant (
+   Id_Etudiant INT,
+   Moyenne FLOAT,
+   Appreciation VARCHAR2(200),
+   Id_Institut INT NOT NULL,
+   Id_Personne INT NOT NULL,
+   PRIMARY KEY(Id_Etudiant),
+   UNIQUE(Id_Personne),
+   FOREIGN KEY(Id_Institut) REFERENCES Institut(Id_Institut),
+   FOREIGN KEY(Id_Personne) REFERENCES Personne(Id_Personne)
+);
+
+CREATE TABLE Candidat (
+   Id_Candidat INT,
+   Salarie NUMBER(1), 
+   Experience NUMBER(3),
+   Situation_Professionnelle VARCHAR2(50),
+   Id_Entreprise INT,
+   Id_Personne INT NOT NULL,
+   PRIMARY KEY(Id_Candidat),
+   UNIQUE(Id_Personne),
+   FOREIGN KEY(Id_Entreprise) REFERENCES Entreprise(Id_Entreprise),
+   FOREIGN KEY(Id_Personne) REFERENCES Personne(Id_Personne)
+);
+
+CREATE TABLE Habite (
+   Id_Localisation INT,
+   Id_Personne INT,
+   PRIMARY KEY(Id_Localisation, Id_Personne),
+   FOREIGN KEY(Id_Localisation) REFERENCES Localisation(Id_Localisation),
+   FOREIGN KEY(Id_Personne) REFERENCES Personne(Id_Personne)
+);
+
+CREATE TABLE A_recu (
+   Id_Diplome INT,
+   Id_Personne INT,
+   PRIMARY KEY(Id_Diplome, Id_Personne),
+   FOREIGN KEY(Id_Diplome) REFERENCES Diplome(Id_Diplome),
+   FOREIGN KEY(Id_Personne) REFERENCES Personne(Id_Personne)
+);
+
+CREATE TABLE Se_Situe (
+   Id_Entreprise INT,
+   Id_Localisation INT,
+   PRIMARY KEY(Id_Entreprise, Id_Localisation),
+   FOREIGN KEY(Id_Entreprise) REFERENCES Entreprise(Id_Entreprise),
+   FOREIGN KEY(Id_Localisation) REFERENCES Localisation(Id_Localisation)
+);
+
+CREATE TABLE Depend (
+   Id_Diplome INT,
+   Id_Fonction INT,
+   PRIMARY KEY(Id_Diplome, Id_Fonction),
+   FOREIGN KEY(Id_Diplome) REFERENCES Diplome(Id_Diplome),
+   FOREIGN KEY(Id_Fonction) REFERENCES Fonction(Id_Fonction)
+);
+
+CREATE TABLE Se_Sent_Capable (
+   Id_Candidat INT,
+   Id_Fonction INT,
+   Fonction_Actuel NUMBER(1), 
+   PRIMARY KEY(Id_Candidat, Id_Fonction),
+   FOREIGN KEY(Id_Candidat) REFERENCES Candidat(Id_Candidat),
+   FOREIGN KEY(Id_Fonction) REFERENCES Fonction(Id_Fonction)
+);
+
+CREATE TABLE Contacte (
+   Id_Candidat INT,
+   Id_Mission INT,
+   Date_Contacte DATE,
+   PRIMARY KEY(Id_Candidat, Id_Mission),
+   FOREIGN KEY(Id_Candidat) REFERENCES Candidat(Id_Candidat),
+   FOREIGN KEY(Id_Mission) REFERENCES Mission(Id_Mission)
+);
+
+CREATE TABLE Localise (
+   Id_Institut INT,
+   Id_Localisation INT,
+   PRIMARY KEY(Id_Institut, Id_Localisation),
+   FOREIGN KEY(Id_Institut) REFERENCES Institut(Id_Institut),
+   FOREIGN KEY(Id_Localisation) REFERENCES Localisation(Id_Localisation)
+);

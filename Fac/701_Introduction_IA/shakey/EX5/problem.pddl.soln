@@ -1,0 +1,3 @@
+(push box2 loca loccouloir shakey)
+(go loca loccouloir shakey)
+(push box2 loccouloir locb shakey)

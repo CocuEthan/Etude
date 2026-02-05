@@ -1,0 +1,89 @@
+courbe e corp fini Fp 
+gen G de E(Fp)
+cle sec a et b
+cle pub A=a.G et B=b.G
+MC = M+a.B
+M = Mc-b.A
+
+DES:
+    def chiffre(self,m):
+        mC=Message([])
+        #On doit mémoriser la longueur totale de la liste à chiffrer
+        mC.ajouteLongueValeur(len(m))
+        pos=0
+        while pos<len(m):
+            x,pos=m.lisMot64Bits(pos)
+            mC.ajouteMot64Bits( self.f(x) )
+        return mC
+
+    def dechiffre(self,mC):
+        mD=Message([])
+        longueur,pos=mC.lisLongueValeur(0)
+
+        while pos<len(mC):
+            y,pos=mC.lisMot64Bits(pos)
+            mD.ajouteMot64Bits( self.f.valInv(y) )
+        return Message(mD[:longueur])
+
+
+ECB:
+    def chiffrer(self, message):        
+return [self.bijection(octet) for octet in message]
+    def dechiffrer(self, message_chiffre):
+ return [self.bijection.valInv(octet) for octet in message_chiffre]
+
+CBC:
+    def chiffrer(self, message):
+        message_chiffre = []
+        blp= self.iv
+        for octet in message:
+            bloc = octet ^ bp
+            bc = self.bijection(bloc)
+            message_chiffre.append(bc)
+            bp = bc
+        return message_chiffre
+    def dechiffrer(self, message_chiffre):
+        message = []
+        bp = self.iv
+        for bc in message_chiffre:
+            bloc = self.bijection.valInv(bc)
+            octet = bloc ^ bp            
+            message.append(octet)
+bp = bc
+        return message
+
+Affine/Symetrique
+def __init__(self ,a=13,b=5):
+        assert isinstance(a,int) and a>0 and a<256 and 
+est_inversible_modulo(a,256),f"{a} doit être inversible dans Z/256Z"
+        self.a=a
+        self.b=b%256
+    def __str__(self):
+        return f"Chiffreur affine avec a={self.a} et b={self.b}"
+    def __repr__(self):
+        return f"ChiffreurAffine({repr(self.a)},{repr(self.b)})"
+    def chiffre(self,m):
+        mc=[(self.a*x+self.b)%256 for x in m]
+        return Message(mc)
+    def dechiffre(self,mc):
+               ia=inverse_modulo(self.a,256)
+        md=[((y-self.b) * ia)%256 for y in mc]         return Message(md)  
+
+Feistel:
+Feistel:
+ def __init__(self, nbTours=4, graine=0):
+        self.nbTours = nbTours
+        random.seed(graine)
+        self.cles = [random.randint(0, 255) for _ in range(nbTours)]
+
+    def __repr__(self):
+        return f"FBijFeistel(nbTours={self.nbTours})"
+
+    def __call__(self, octet):
+        gauche = octet >> 4
+        droite = octet & 0x0F
+        for cle in self.cles:
+            nouvelleGauche = droite
+            droite = gauche ^ self.fonctionDeTour(droite, cle)
+            gauche = nouvelleGauche
+        return (gauche << 4) | droite

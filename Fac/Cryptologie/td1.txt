@@ -1,0 +1,19 @@
+exercice 13
+
+100  prend valeur 113  car +13 de decalage
+pour 255   12 car modulo 256
+
+donc pour reconvertir 12 - 13 modulo = 255
+il est 20 heure dans 6 heure il sera 2 heure (du matin) 
+26 =(trois barre) 2[24]  26%24
+
+
+pour %20
+si decalage par 3 alors 3 ->9
+si 7 alors 7 -> 1
+
+calcule  2**12378  %100
+
+exercice 4:
+
+

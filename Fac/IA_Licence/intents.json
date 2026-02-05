@@ -1,0 +1,31 @@
+{
+  "intents": [
+    {
+      "tag": "salutation",
+      "patterns": [
+        "Salut",
+        "Hello",
+        "Comment vas-tu",
+        "Enchanté"
+      ],
+      "reponses": [
+        "Hey :-)",
+        "Bonjour, bienvenu",
+        "Bonjour, de quoi avez-vous besoin?"
+      ]
+    },
+    {
+      "tag": "temps",
+      "patterns": [
+        "quel temps fait-il ?",
+        "est-ce qu'il pleut ?"
+    ],
+    "reponses": [
+      "il fait beau aujourd'hui",
+      "je ne sais pas", 
+      "je crois qu'il neige"
+    ]
+  }
+
+]
+}

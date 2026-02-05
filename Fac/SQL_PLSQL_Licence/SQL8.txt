@@ -1,0 +1,102 @@
+-- 1. Sélectionner toutes les entreprises qui n'ont pas proposé de mission et qui se situent à Paris.
+SELECT e.Nom_Entreprise
+FROM Entreprise e
+JOIN Se_Situe s ON e.Id_Entreprise = s.Id_Entreprise
+JOIN Localisation l ON s.Id_Localisation = l.Id_Localisation
+WHERE l.Ville = 'Paris'
+  AND NOT EXISTS (
+    SELECT 1 FROM Mission m WHERE m.Id_Entreprise = e.Id_Entreprise
+  );
+
+-- 2. Sélectionner toutes les missions qui, pour la même fonction, payent plus que la moyenne, affichées dans l'ordre décroissant.
+SELECT m.*
+FROM Mission m
+JOIN (
+  SELECT Id_Fonction, AVG(Salaire) AS Moyenne_Salaire
+  FROM Mission
+  GROUP BY Id_Fonction
+) avg_sal ON m.Id_Fonction = avg_sal.Id_Fonction
+WHERE m.Salaire > avg_sal.Moyenne_Salaire
+ORDER BY m.Salaire DESC;
+
+-- 3. Calculer la somme du nombre de missions proposées au total par toutes les entreprises qui se trouvent à Nice
+--    si le nom de l'entreprise contient exactement deux 's' collés.
+SELECT SUM(e.NB_Mission_Propose) AS Total_Missions
+FROM Entreprise e
+JOIN Se_Situe s ON e.Id_Entreprise = s.Id_Entreprise
+JOIN Localisation l ON s.Id_Localisation = l.Id_Localisation
+WHERE l.Ville = 'Nice'
+  AND LENGTH(e.Nom_Entreprise) - LENGTH(REPLACE(e.Nom_Entreprise, 's', '')) = 2
+  AND INSTR(e.Nom_Entreprise, 'ss') > 0;
+
+-- 4. Sélectionner toutes les personnes diplômées d'un Master dont le numéro commence par 07 et qui habitent à Paris
+--    ou celles dont le numéro commence par 06 et qui habitent à Marseille.
+SELECT DISTINCT p.Nom_Personne, p.Prenom_Personne
+FROM Personne p
+JOIN A_recu ar ON p.Id_Personne = ar.Id_Personne
+JOIN Diplome d ON ar.Id_Diplome = d.Id_Diplome
+JOIN Habite h ON p.Id_Personne = h.Id_Personne
+JOIN Localisation l ON h.Id_Localisation = l.Id_Localisation
+WHERE d.Nom_Diplome = 'Master'
+  AND (
+    (p.Telephone_Personne LIKE '07%' AND l.Ville = 'Paris')
+    OR
+    (p.Telephone_Personne LIKE '06%' AND l.Ville = 'Marseille')
+  );
+
+-- 5. Sélectionner les candidats qui se sentent capables pour toutes les fonctions disponibles.
+SELECT c.Id_Candidat, p.Nom_Personne, p.Prenom_Personne
+FROM Candidat c
+JOIN Personne p ON c.Id_Personne = p.Id_Personne
+WHERE NOT EXISTS (
+  SELECT f.Id_Fonction
+  FROM Fonction f
+  WHERE NOT EXISTS (
+    SELECT s.Id_Fonction
+    FROM Se_Sent_Capable s
+    WHERE s.Id_Candidat = c.Id_Candidat AND s.Id_Fonction = f.Id_Fonction
+  )
+);
+
+-- 6. Sélectionner les noms des entreprises qui ont proposé des missions pour toutes les fonctions.
+SELECT e.Nom_Entreprise
+FROM Entreprise e
+JOIN Mission m ON e.Id_Entreprise = m.Id_Entreprise
+GROUP BY e.Nom_Entreprise
+HAVING COUNT(DISTINCT m.Id_Fonction) = (SELECT COUNT(*) FROM Fonction);
+
+-- 7. Sélectionner les fonctions dont toutes les missions payent au-dessus du salaire moyen général.
+WITH Salaire_Moyen_General AS (
+  SELECT AVG(Salaire) AS Salaire_Moyen
+  FROM Mission
+)
+SELECT f.Nom_Fonction
+FROM Fonction f
+JOIN Mission m ON f.Id_Fonction = m.Id_Fonction
+GROUP BY f.Nom_Fonction
+HAVING MIN(m.Salaire) > (SELECT Salaire_Moyen FROM Salaire_Moyen_General);
+
+-- 8. Sélectionner les étudiants qui ont reçu plus de diplômes que le nombre moyen de diplômes reçus par étudiant.
+WITH Nombre_Diplomes_Etudiants AS (
+  SELECT e.Id_Etudiant, COUNT(*) AS Nombre_Diplomes
+  FROM Etudiant e
+  JOIN A_recu ar ON e.Id_Personne = ar.Id_Personne
+  GROUP BY e.Id_Etudiant
+),
+Moyenne_Diplomes AS (
+  SELECT AVG(Nombre_Diplomes) AS Diplomes_Moyen
+  FROM Nombre_Diplomes_Etudiants
+)
+SELECT e.Id_Etudiant, p.Nom_Personne, p.Prenom_Personne, nde.Nombre_Diplomes
+FROM Nombre_Diplomes_Etudiants nde
+JOIN Etudiant e ON nde.Id_Etudiant = e.Id_Etudiant
+JOIN Personne p ON e.Id_Personne = p.Id_Personne
+WHERE nde.Nombre_Diplomes > (SELECT Diplomes_Moyen FROM Moyenne_Diplomes);
+
+-- 9. Lister tous les candidats et toutes les fonctions, en indiquant si le candidat se sent capable pour la fonction.
+SELECT c.Id_Candidat, p.Nom_Personne, p.Prenom_Personne, f.Nom_Fonction,
+       CASE WHEN s.Id_Candidat IS NOT NULL THEN 'Oui' ELSE 'Non' END AS Se_Sent_Capable
+FROM Candidat c
+CROSS JOIN Fonction f
+LEFT JOIN Se_Sent_Capable s ON c.Id_Candidat = s.Id_Candidat AND f.Id_Fonction = s.Id_Fonction
+JOIN Personne p ON c.Id_Personne = p.Id_Personne;

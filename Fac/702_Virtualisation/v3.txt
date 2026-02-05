@@ -1,0 +1,101 @@
+On commence par récupérer la v1
+# 1. Créer le dossier v3 et y aller
+mkdir -p ~/projet/v3
+cd ~/projet/v3
+
+# 2. Copier les indispensables depuis la v1 (Dockerfile, binaires, libs)
+cp ../v1/geonet .
+cp ../v1/buscom .
+cp ../v1/libasnd.so .
+cp ../v1/libbuscomd.so .
+cp ../v1/Dockerfile .
+
+# 3. Copier le dossier de config de base
+cp -r ../v1/config .
+mkdir logs
+
+Pour configurer swarn sur le manager faire: sudo docker swarm init
+Sur les workers:sudo docker swarm join --token SWMTKN-1-0arl5so94qhd94uqy5zvmoy6oqfvdmorrmw7n1293j5sgc5i0j-9etnk0w0ep5gdquz2gnqmue7e 10.11.41.37:2377
+
+test pour vérifier que cela fonctionne (sur le manager faire): sudo docker node ls
+
+Ensuite on peut envoyé l'image de la v3 du manager vers les workers:
+récupérer ip des worker: ip a
+scp -r ~/projet/v3 ubuntu@ipworker:~/projet/v3
+workers 1: scp -r ~/projet/v3 ubuntu@10.11.41.38:~/projet/v3
+workers 2: scp -r ~/projet/v3 ubuntu@10.11.41.43:~/projet/v3
+
+Dans le workers 1 
+on build l'image
+cd projet/v3
+sudo docker build -t projet_v3 .
+
+puis on le configures de manière unique
+nano config/constantes.json
+Dans constant. json
+"stationId": 1001,
+...
+"mid": "BABEBABE1001"
+
+Dans le workers 2
+on build l'image
+cd projet/v3/
+sudo docker build -t projet_v3 .
+
+puis on le configures de manière unique
+nano config/constantes.json
+Dans constant. json
+"stationId": 1002,
+...
+"mid": "BABEBABE1002"
+
+Maintenant on gère le déploiement. On retourne sur le manager
+
+
+on crée le fichier yml: nano stack.yml
+
+on rentre ceci a l'intérieur:
+
+version: "3.8"
+
+services:
+  buscom:
+    image: projet_v3
+    deploy:
+      mode: global
+    user: utilisateur
+    command: /usr/bin/buscom
+    volumes:
+      - /home/ubuntu/projet/v3/config:/etc/its/config
+    networks:
+      - hostnet
+
+  geonet:
+    image: projet_v3
+    deploy:
+      mode: global
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    volumes:
+      - /home/ubuntu/projet/v3/config:/etc/its/config
+      - /home/ubuntu/projet/v3/logs:/var/log/its
+    command: sh -c "rm -f /tmp/geonet.lock && /usr/sbin/geonet -fnmlt"
+    networks:
+      - hostnet
+    depends_on:
+      - buscom
+
+networks:
+  hostnet:
+    external: true
+    name: host
+On lance le déploiement: 
+pour les worker: sudo docker swarm join --token <TOKEN> <IP_MANAGER>:2377
+pour le manager: sudo docker stack deploy -c stack.yml projet_its
+
+Pour vérifier le bon fonctionnement:
+Sur workers 2: sudo docker ps
+puis sudo docker logs -f <ID_BUSCOM> | grep --line-buffered "cam"
+
+Sur le manager: sudo docker stack ps projet_its

@@ -1,0 +1,81 @@
+prc ladder(x,y,h)
+  for(i=y;i<=y+h-1;i=i+1)
+    put(x,i,LADDER)
+  end
+end
+
+prc rect(x1,y1,x2,y2,b)
+  for(i=x1;i<=x2;i=i+1)
+    put(i,y1,b)
+    put(i,y2,b)
+  end
+  for(i=y1;i<=y2;i=i+1)
+    put(x1,i,b)
+    put(x2,i,b)
+  end
+end
+
+prc frect(x1,y1,x2,y2,b)
+  for(i=x1;i<=x2;i=i+1)
+    for(j=y1;j<=y2;j=j+1)
+      put(i,j,b)
+    end
+  end
+end
+
+prc hline(x,y,l,b)
+  for(i=x;i<x+l;i=i+1)
+    put(i,y,b)
+  end
+end
+
+prc vline(x,y,l,b)
+  for(i=y;i<y+l;i=i+1)
+    put(x,i,b)
+  end
+end
+
+level
+  frect(0,0,59,3,BLOCK)
+  frect(0,16,59,19,BLOCK)
+  frect(0,9,59,10,BLOCK)
+  vline(0,0,19,BLOCK)
+  vline(59,0,19,BLOCK)
+  put(3,12,ENTER)
+  ladder(16,9,7)
+  put(21,5,ROBOT)
+  put(49,5,KEY(1))
+  put(49,5,DOOR(1))
+  put(39,8,BOMB)
+end
+
+prc gate(x,y,n)
+  while(y<20 AND get(x,y)==EMPTY)
+    put(x,y,GATE(n))
+    y=y+1
+  end
+end
+
+level
+  rect(0,4,59,19,BLOCK)
+  vline(0,0,4,BLOCK)
+  vline(59,0,4,BLOCK)
+  hline(0,9,59,BLOCK)
+  hline(1,14,3,BLOCK)
+  hline(15,14,30,BLOCK)
+  hline(56,14,3,BLOCK)
+  gate(29,0,1)
+  put(1,0,DOOR(3))
+  put(1,10,DOOR(1))
+  put(56,10,DOOR(2))
+  put(56,5,DOOR(3))
+  put(56,0,DOOR(4))
+  put(18,6,PROBE)
+  put(37,10,ROBOT)
+  ladder(4,14,5)
+  ladder(12,14,5)
+  ladder(53,14,5)
+  ladder(45,14,5)
+  ladder(28,9,5)
+  
+end

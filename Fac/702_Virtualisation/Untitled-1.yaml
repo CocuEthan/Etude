@@ -1,0 +1,22 @@
+services:
+  buscom:
+    build: .
+    container_name: buscom_v2
+    user: utilisateur
+    command: /usr/bin/buscom
+    volumes:
+      - ./config:/etc/its/config
+    expose:
+      - "2775"
+    tty: true
+
+  geonet:
+    build: .
+    container_name: geonet_v2
+    privileged: true
+    depends_on:
+      - buscom
+    command: sh -c "rm -f /tmp/geonet.lock && /usr/sbin/geonet -fnmlt"
+    volumes:
+      - ./config:/etc/its/config
+      - ./logs:/var/log/its

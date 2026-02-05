@@ -1,0 +1,8 @@
+CREATE OR REPLACE VIEW FINAL_DATA_VIEW AS
+SELECT *,
+       CASE
+           WHEN PCT_HRR < 0.6 THEN 'Faible'
+           WHEN PCT_HRR BETWEEN 0.6 AND 0.8 THEN 'Modérée'
+           ELSE 'Élevée'
+       END AS INTENSITY_LEVEL
+FROM FINAL_DATA;
