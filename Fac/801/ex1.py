@@ -59,11 +59,6 @@ mes_points = [1, 3, 7, 9, 15, 17, 19, 21]
 dessiner_planche_combinaisons(mes_points, nb_a_choisir=3, colonnes=7)
 
 #ecercice 2: 3 cluster les point noir serons affecté au point coloré (centre de cluster) le plus proche
-
-import matplotlib.pyplot as plt
-import itertools
-import math
-
 # ==========================================
 # 1. DONNÉES DE L'EXERCICE
 # ==========================================
@@ -312,9 +307,6 @@ histogramme_minima(p1d, k=3, titre="Histogramme des scores - Points 1D")
 histogramme_minima(p2d, k=3, titre="Histogramme des scores - Points 2D")
 histogramme_minima(p3d, k=3, titre="Histogramme des scores - Points 1D")
 
-
-import matplotlib.pyplot as plt
-import numpy as np
 
 def convergence_1d(points_bruts, k=3):
     # Transformation des points en format [x, 0] pour le calcul
