@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(find C:UserscocueDocumentsbourse -type f -name *)",
-      "Bash(python:*)"
-    ]
-  }
-}

@@ -1,0 +1,239 @@
+﻿Analyse technique de la forme de couverture d’antenne 4G/5G et cadre méthodologique pour l’élaboration d’un cahier des charges
+La mutation des réseaux de télécommunications mobiles, marquée par le passage de la quatrième génération (4G LTE) à la cinquième génération (5G NR), redéfinit fondamentalement les concepts de propagation et de couverture spatiale. Dans l’architecture 4G traditionnelle, la couverture est principalement assurée par des antennes sectorielles statiques dont le diagramme de rayonnement, bien que réglable, reste relativement invariant dans le temps.1 À l'inverse, la 5G introduit une dynamique spatiale sans précédent grâce aux technologies Massive MIMO (Multiple-Input Multiple-Output) et au Beamforming (formation de faisceaux), transformant la zone de couverture en un ensemble de faisceaux étroits et orientables qui s'adaptent en temps réel à la position des terminaux.3 L'analyse de la forme de cette couverture selon divers paramètres techniques, environnementaux et réglementaires constitue désormais le pilier de l'ingénierie radio moderne. La mise en place d'un cahier des charges rigoureux pour de telles études est impérative pour garantir la performance, la fiabilité et la rentabilité des déploiements.5
+Évolution des architectures d'antennes et principes de rayonnement
+La forme de la couverture réseau est la manifestation physique de l'interaction entre l'antenne et son environnement. En 4G LTE, les stations de base (eNodeB) utilisent généralement des configurations MIMO de faible ordre, comme le 2x2 ou le 4x4, où le flux transmis peut être soit un flux unique avec précodage pour améliorer la diversité, soit des flux multiples pour augmenter le débit.1 Le diagramme de rayonnement résultant est souvent un lobe large couvrant un secteur de 65 à 90 degrés en azimut. L'optimisation de cette forme repose sur des paramètres mécaniques et électriques statiques tels que l'azimut et le tilt.2
+L'arrivée de la 5G NR et du Massive MIMO bouleverse cette approche en déployant des réseaux d'antennes actifs (AAS) comprenant jusqu'à 64 émetteurs et 64 récepteurs (64T64R) ou davantage.7 Cette architecture permet de manipuler la phase et l'amplitude de chaque élément individuel pour créer des interférences constructives dans une direction précise, formant ainsi un faisceau directif.1 Mathématiquement, la station de base applique un poids complexe sur chaque antenne, exprimé par l'équation   , où    représente le vecteur de pondération et    le vecteur de réponse spatiale.1 Cette focalisation de l'énergie augmente le gain de l'antenne, réduit les interférences hors faisceau et permet une réutilisation plus efficace des ressources fréquentielles.3
+Comparaison structurelle des technologies de couverture
+Paramètre
+	4G LTE (Secteur Classique)
+	5G NR (Massive MIMO / AAS)
+	Configuration d'antenne
+	Statique (MIMO 2x2, 4x4)
+	Dynamique (64T64R, 32T32R)
+	Largeur de faisceau
+	Fixe (ex: 65° horizontal)
+	Variable (Faisceaux étroits dynamiques)
+	Gain d'antenne
+	Constant (15-18 dBi)
+	Adaptatif et élevé par focalisation
+	Pilotage spatial
+	Tilt mécanique/électrique manuel
+	Beamforming 3D (Azimut + Élévation)
+	Capacité utilisateur
+	Partage sectoriel
+	Multiplexage spatial (MU-MIMO)
+	Infrastructure
+	Antennes passives + modules RF
+	Systèmes d'antennes actives intégrés
+	1
+Le Beamforming peut être implémenté de trois manières distinctes : numérique, analogique ou hybride. Le Beamforming numérique, utilisé en LTE Advanced Pro et en 5G NR, permet de générer plusieurs faisceaux simultanés sur les mêmes ressources temps-fréquence, augmentant radicalement la capacité de la cellule.9 Le Beamforming analogique est souvent privilégié pour les ondes millimétriques (mmWave) afin de compenser les pertes de propagation élevées par un gain directionnel massif.9 Enfin, l'approche hybride combine ces deux méthodes pour offrir un compromis optimal entre complexité matérielle et performance logicielle.9
+Paramètres techniques fondamentaux influençant la forme de la couverture
+L'analyse de la forme de couverture exige une maîtrise précise de plusieurs variables d'ingénierie. L'azimut, défini comme l'angle d'orientation de l'antenne par rapport au nord géographique, détermine l'axe principal de diffusion du signal.2 Une erreur d'alignement de quelques degrés peut entraîner des zones d'ombre significatives ou des chevauchements indésirables entre secteurs voisins, provoquant des interférences co-canal.5
+Le contrôle de l'inclinaison verticale, ou tilt, est l'un des leviers les plus puissants pour sculpter la zone de couverture. Le tilt mécanique consiste à incliner physiquement l'antenne sur son support, tandis que le tilt électrique ajuste le déphasage des signaux alimentant les dipôles internes.2 Le tilt électrique est généralement préféré car il maintient l'intégrité du diagramme de rayonnement horizontal, évitant les déformations "en banane" typiques du tilt mécanique excessif.2 La hauteur de l'antenne au-dessus du sol impacte également la portée : une antenne située trop haut peut causer des interférences à longue distance, tandis qu'une position trop basse limite la ligne de vue (LOS) et la pénétration du signal.5
+Le roll, ou angle de rotation autour de l'axe central, bien que moins fréquemment ajusté, influence la polarisation du signal et doit être contrôlé pour minimiser les pertes de désadaptation de polarisation entre l'antenne et le terminal.5 Enfin, le gain d'antenne, exprimé en dBi, mesure l'efficacité de l'antenne à concentrer l'énergie. Un gain élevé réduit l'ouverture du faisceau, ce qui est idéal pour la couverture à longue distance mais peut laisser des zones de faible signal à proximité immédiate du pylône.4
+Paramètres de configuration d'un site radio
+Paramètre
+	Unité
+	Impact sur la Couverture
+	Azimut
+	Degrés (°)
+	Direction horizontale du flux principal
+	Tilt (Mécanique/Électrique)
+	Degrés (°)
+	Portée de la cellule et contrôle des interférences
+	Hauteur au sol (AGL)
+	Mètres (m)
+	Horizon radio et franchissement d'obstacles
+	Puissance d'émission (EIRP)
+	dBm / Watts
+	Budget de liaison et densité de signal
+	Polarisation
+	Degrés (ex: +/- 45°)
+	Diversité de réception et immunité aux réflexions
+	Largeur de bande
+	MHz
+	Capacité et sensibilité au bruit
+	2
+Modélisation de la propagation et modèles de prédiction
+La forme de la couverture n'est pas seulement le résultat des réglages de l'antenne, mais aussi de la manière dont les ondes interagissent avec le terrain. La modélisation de la propagation radio est essentielle pour prédire l'affaiblissement du signal (path loss). Les modèles varient selon leur complexité, allant de l'approche empirique statistique aux méthodes déterministes de haute précision.12
+Le modèle Okumura-Hata est le fondement historique des prédictions radio en zone urbaine. Valide entre 150 MHz et 1500 MHz, il s'appuie sur des données collectées à Tokyo et distingue trois types d'environnements : urbain, suburbain et ouvert.12 Bien que robuste pour la macro-cellulaire 4G, il manque de précision pour les fréquences plus élevées et les environnements urbains denses. Le modèle COST 231 Hata a été développé pour étendre ces prédictions jusqu'à 2000 MHz, intégrant des facteurs de correction pour les métropoles.14
+Pour les micro-cellules urbaines, le modèle COST 231 Walfisch-Ikegami est souvent privilégié car il considère la géométrie des bâtiments, la largeur des rues et l'angle d'incidence par rapport aux toits.14 Cependant, pour la 5G, c'est le rapport technique 3GPP TR 38.901 qui fait autorité. Ce document définit des modèles de canal pour une plage de fréquences s'étendant de 0,5 à 100 GHz, couvrant ainsi les bandes sub-6 GHz et millimétriques.16 Il propose des scénarios spécifiques comme l'Urban Micro (UMi) pour les déploiements de rue, l'Urban Macro (UMa) pour la couverture large, et l'Indoor Office (InH) pour la planification à l'intérieur des bâtiments.18
+Caractéristiques des modèles de propagation courants
+Modèle
+	Plage de Fréquences
+	Scénario Typique
+	Précision / Complexité
+	Okumura-Hata
+	150 - 1500 MHz
+	Macro-cellulaire rural/urbain
+	Faible / Empirique
+	COST 231 Hata
+	1500 - 2000 MHz
+	Extension urbaine 2G/3G/4G
+	Moyenne / Semi-empirique
+	Walfisch-Ikegami
+	800 - 2000 MHz
+	Milieu urbain dense (rues)
+	Elevée / Géométrique
+	3GPP TR 38.901
+	0,5 - 100 GHz
+	Standard 5G (UMi, UMa, InH)
+	Très élevée / Stochastique
+	Ray Tracing
+	Jusqu'à 300 GHz
+	Planification millimétrique
+	Maximale / Déterministe
+	12
+Le lancers de rayons (Ray Tracing), disponible dans des outils comme Aster (Atoll), représente le summum de la simulation. Il simule physiquement le trajet de chaque rayon électromagnétique, prenant en compte les réflexions sur les façades, la diffraction sur les arêtes des bâtiments et la transmission à travers les matériaux.13 Cette méthode est indispensable pour les ondes millimétriques dont la propagation se rapproche de celle de la lumière, rendant les obstacles totalement opaques et créant des zones d'ombre très marquées.10
+Impact des facteurs environnementaux sur la morphologie de couverture
+L'analyse de la couverture ne peut faire l'abstraction des phénomènes naturels qui altèrent la propagation. Pour les fréquences 5G au-delà de 10 GHz, l'atténuation atmosphérique devient un paramètre critique. La pluie, en particulier, absorbe et diffuse l'énergie radio. L'atténuation spécifique due à la pluie est modélisée par une loi de puissance dépendant du taux de précipitation et de la polarisation du signal.22 Des études ont montré que dans des conditions de pluie torrentielle, l'atténuation peut atteindre 20 dB dans la bande sub-6 GHz et jusqu'à 40-50 dB pour les ondes millimétriques, réduisant la portée utile à quelques centaines de mètres seulement.24
+La végétation constitue un autre défi majeur, souvent sous-estimé dans les simulations simplistes. Les arbres et les bosquets causent des pertes par diffraction et absorption. Le modèle de Weissberger estime l'excès de perte dû au feuillage par la formule    pour une profondeur de végétation inférieure à 14 mètres, et    pour des profondeurs allant jusqu'à 400 mètres, où    est la fréquence en GHz et    la profondeur en mètres.25 L'impact est saisonnier : la perte est environ 20 % plus élevée lorsque les arbres sont en feuilles par rapport à l'hiver.27 En 5G, la présence de végétation peut réduire la zone de couverture de près de 15 % dans les bandes moyennes et provoquer des évanouissements rapides du signal (fading) dus au mouvement des feuilles sous l'effet du vent.29
+Enfin, les matériaux de construction jouent un rôle de filtre. Le verre à faible émissivité (Low-E), utilisé pour l'isolation thermique, peut bloquer jusqu'à 30 dB du signal extérieur, forçant les opérateurs à déployer des solutions de couverture intérieure (Indoor) telles que des Small Cells ou des systèmes d'antennes distribuées (DAS).31
+Facteurs d'atténuation environnementaux (Exemples)
+Obstacle / Phénomène
+	Atténuation Typique (dB)
+	Sensibilité Fréquentielle
+	Pluie (Taux élevé)
+	5 - 40 dB
+	Très élevée (> 10 GHz)
+	Végétation (10m dense)
+	10 - 25 dB
+	Moyenne à élevée
+	Mur en briques
+	10 - 20 dB
+	Constante
+	Béton armé
+	20 - 40 dB
+	Très élevée
+	Verre moderne (Low-E)
+	25 - 35 dB
+	Très élevée
+	22
+Indicateurs de performance (KPI) pour l'évaluation de la couverture
+L'analyse de la forme de couverture doit être quantifiée par des indicateurs de performance radio normalisés. En 4G et 5G, trois métriques dominent l'évaluation de la qualité du lien :
+1. RSRP (Reference Signal Received Power) : Il s'agit de la puissance moyenne reçue des signaux de référence. Il définit l'étendue brute de la couverture. Un niveau excellent se situe au-dessus de -80 dBm, tandis qu'un niveau inférieur à -110 dBm indique une zone de décrochage probable.31
+2. RSRQ (Reference Signal Received Quality) : Cet indicateur combine la puissance reçue avec le niveau d'interférence et de charge du réseau. Il permet d'évaluer si le signal, même fort, est suffisamment propre pour être exploité.33
+3. SINR (Signal to Interference plus Noise Ratio) : C'est le rapport entre le signal utile et le bruit total (thermique + interférences). Le SINR est le moteur du débit utilisateur : un SINR élevé permet d'utiliser des modulations d'ordre supérieur (256 QAM) et d'augmenter l'efficacité spectrale.31
+Le débit réel (Throughput) et la latence sont les conséquences directes de ces indicateurs radio. En 5G, la latence doit idéalement être inférieure à 1 milliseconde pour les applications critiques, tandis que les débits de pointe peuvent atteindre plusieurs gigabits par seconde en mmWave.8
+Seuils de qualité des signaux radio
+Niveau de Qualité
+	RSRP (dBm)
+	SINR (dB)
+	RSRQ (dB)
+	Excellent
+	  
+
+	  
+
+	  
+
+	Bon
+	  
+ à   
+	  
+ à   
+	  
+ à   
+	Passable / OK
+	  
+ à   
+	  
+ à   
+	  
+ à   
+	Médiocre
+	  
+ à   
+	  
+
+	  
+
+	Hors service
+	  
+
+	Unusable
+	Unusable
+	31
+Écosystème des logiciels de planification et de simulation
+La complexité des paramètres à prendre en compte nécessite le recours à des logiciels spécialisés. Atoll, développé par Forsk, est devenu le standard de l'industrie. Il permet de modéliser des réseaux multi-technologies (2G à 5G) et propose des fonctionnalités avancées comme la simulation de Monte-Carlo pour l'analyse des interférences et la planification automatique des cellules (ACP).13
+D'autres outils comme RadioPlanner ou RadioMobile offrent des alternatives pour des projets de moindre envergure ou des réseaux privés. RadioPlanner se distingue par sa gestion simplifiée des modèles Longley-Rice et ITU-R P.1546, très utiles pour la planification de couverture régionale.11 Dans le domaine de l'open-source, des projets comme srsLTE ou OpenAirInterface (OAI) fournissent des piles protocolaires complètes permettant de simuler non seulement la propagation mais aussi le comportement du cœur de réseau (Core Network) et des terminaux.37
+Pour l'analyse techno-économique, la bibliothèque Python pysim5g permet de lier les paramètres techniques de couverture aux coûts de déploiement, offrant un cadre décisionnel précieux pour les opérateurs envisageant une densification massive par Small Cells.37
+Structure détaillée d'un cahier des charges pour une étude de couverture
+L'élaboration d'un cahier des charges (CDC) pour l'analyse de la couverture 4G/5G est une étape cruciale pour structurer la réflexion des parties prenantes et encadrer les prestations d'ingénierie.40 Un bon CDC doit traduire le besoin métier en exigences techniques concrètes, mesurables et datées.6
+1. Contexte et Objectifs stratégiques
+Le document doit commencer par exposer le fondement de la demande : s'agit-il d'une mise en conformité réglementaire, d'une extension de capacité pour un événement ponctuel, ou d'un déploiement industriel privé? L'objectif doit être quantifié, par exemple : "Atteindre un taux de satisfaction client de 80 % dans les zones indoor d'ici 12 mois".6 Il convient de décrire l'état actuel du réseau, ses limites et les "irritants" (zones blanches, appels coupés) que le projet vise à éliminer.6
+2. Périmètre d'application
+Le périmètre définit les frontières géographiques et technologiques du projet. Il doit préciser les zones à couvrir (cartes SIG, plans de bâtiments) et celles qui sont exclues pour éviter toute dérive de périmètre (scope creep).6 Les bandes de fréquences (ex: 700 MHz pour la portée, 3,5 GHz pour le débit) et les types de terminaux à supporter doivent être listés.2
+3. Exigences techniques et de modélisation
+Cette section est le cœur de l'expertise radio. Elle doit imposer :
+* L'utilisation de modèles de propagation spécifiques selon l'environnement (ex: Ray Tracing pour le centre-ville dense).13
+* La résolution des données cartographiques (MNT, MNE, Clutter) : une précision de 1 mètre peut être requise pour la 5G millimétrique.35
+* La prise en compte de contraintes spécifiques comme la pénétration dans les bâtiments (O2I) ou l'atténuation par la végétation.18
+* Les paramètres de configuration des sites : types d'antennes (Massive MIMO 64T64R), puissance d'émission, azimuts et tilts cibles.1
+4. Spécifications des livrables
+Pour garantir la qualité de la prestation, le CDC doit exiger des livrables documentés et exploitables :
+* Synoptique de la solution : Schéma de principe incluant les BBU, RRU et antennes.43
+* Cartographies de couverture : Prédictions RSRP, RSRQ et SINR sous forme de "heatmaps".31
+* Analyses de capacité : Simulation du trafic pour identifier les risques de saturation.13
+* Fiches de configuration de site : Détail pour chaque secteur de l'azimut, du tilt, de la hauteur et du modèle d'antenne.43
+* Dossier d'installation : Passage des câbles, synoptique de câblage détaillé et photos-montages.43
+5. Contraintes réglementaires et sanitaires
+L'étude doit impérativement respecter les seuils d'exposition du public aux ondes électromagnétiques définis par l'ANFR et l'ICNIRP (ex: 6 V/m pour les points atypiques).45 Les contraintes d'urbanisme (intégration paysagère des pylônes) et environnementales (consommation énergétique cible en kWh/an) doivent également être intégrées.7
+Analyse comparative et perspectives d'ingénierie
+L'évolution de la forme de couverture d'antenne vers une dynamique adaptative soulève des questions de maintenance et d'optimisation continue. L'alignement précis des antennes reste un défi opérationnel : un mauvais azimut ou un tilt déréglé lors de l'installation initiale peut dégrader les performances globales du réseau de manière durable.5 L'utilisation de capteurs IoT pour monitorer l'alignement en temps réel devient une recommandation standard pour les sites critiques.
+Par ailleurs, la coexistence entre la 4G et la 5G, notamment via le Dynamic Spectrum Sharing (DSS), complexifie l'analyse de couverture. Le signal 5G partageant les mêmes ressources que la 4G dans les bandes basses peut voir sa "forme" de couverture varier en fonction de la charge instantanée de chaque technologie.13 La planification doit donc intégrer des marges de sécurité pour garantir la continuité de service.
+L'avenir se dessine vers des réseaux auto-organisés (SON - Self-Organizing Networks) où les paramètres d'antenne (azimut, tilt, beamforming weights) seront ajustés automatiquement par des algorithmes d'intelligence artificielle basés sur les retours réels des terminaux (MDT - Minimization of Drive Tests).13 Cette automatisation permettra de sculpter la couverture en temps réel pour suivre les flux de population, par exemple lors de grands événements sportifs ou culturels.
+Synthèse méthodologique pour le praticien
+Pour mener à bien une analyse de forme de couverture et rédiger un cahier des charges efficace, le professionnel doit adopter une approche structurée combinant rigueur théorique et pragmatisme de terrain. L'analyse ne se limite pas à un tracé coloré sur une carte ; elle est la synthèse d'une équation complexe incluant la physique des ondes, la topographie urbaine et les besoins de capacité.6
+Il est recommandé de toujours valider les simulations par des mesures réelles (Drive Tests ou CW Measurements) afin de calibrer les modèles de propagation. Une simulation non calibrée peut présenter des erreurs de signal de 10 à 20 dB, rendant la planification caduque.20 Le cahier des charges doit donc prévoir une phase de "VABF" (Vérification d'Aptitude au Bon Fonctionnement) après le déploiement pour s'assurer que la forme de couverture réelle correspond bien aux prédictions nominales.48
+En définitive, la 5G transforme l'antenne, autrefois simple diffuseur, en un projecteur intelligent. Cette intelligence spatiale exige une nouvelle génération d'ingénieurs radio capables de manipuler non seulement des dBm, mais aussi des vecteurs de phase, des modèles stochastiques et des algorithmes d'optimisation avancés. Le cahier des charges est l'outil qui garantit que cette complexité technologique se traduit par un service robuste et durable pour l'utilisateur final.6
+Sources des citations
+1. Comprendre comment les antennes actives 5G Massive MIMO vont révolutionner l'expérience client | NEXCOM Systems, consulté le février 18, 2026, https://www.nexcom.fr/comprendre-comment-les-antennes-actives-5g-massive-mimo-vont-revolutionner-lexperience-client/
+2. Les relais de téléphonie mobile - Blog Julien Delmas, consulté le février 18, 2026, https://blog.juliendelmas.fr/?les-relais-de-telephonie-mobile
+3. Comprendre Massive MIMO et Beamforming : un guide simple pour tous, consulté le février 18, 2026, https://wraycastle.com/fr/blogs/base-de-connaissances/understanding-massive-mimo-and-beamforming-a-simple-guide-for-everyone
+4. Massive MIMO: pierre angulaire des réseaux 5G qui change la donne - Data-alliance.net, consulté le février 18, 2026, https://www.data-alliance.net/fr/massive-mimo-pierre-angulaire-des-r%C3%A9seaux-5g-qui-change-la-donne
+5. Pourquoi l'alignement précis des antennes est crucial pour les réseaux radio | Blog - EXFO, consulté le février 18, 2026, https://www.exfo.com/fr/ressources/blog/pourquoi-alignement-precis-antennes-crucial-reseaux-radio/
+6. Projet informatique : comment rédiger un bon cahier des charges - ORSYS, consulté le février 18, 2026, https://www.orsys.fr/orsys-lemag/projet-informatique-comment-rediger-un-bon-cahier-des-charges/
+7. Evaluation de la consommation énergétique d'un déploiement 4G vs 5G - Note détaillée de l'étude - Arcep, consulté le février 18, 2026, https://www.arcep.fr/fileadmin/user_upload/grands_dossiers/environnement/etude-environnement-4Gvs5G-note-detaillee-comite-expert-mobile_janv2022.pdf
+8. La 5G ‟cinquième génération de réseau mobile” - Site officiel de la ville d'Ancy-le-Franc, consulté le février 18, 2026, http://www.ancylefranc.fr/alf_Docs/CRIIREM_Document-rapport-5G.pdf
+9. Massive MIMO and Beamforming in 5G - 5G Networks, consulté le février 18, 2026, https://www.5g-networks.net/massive-mimo-and-beamforming-in-5g/
+10. La technologie mmwave révolutionne les communications 5G - Eukleed, consulté le février 18, 2026, https://www.eukleed.fr/blog/la-technologie-mmwave-revolutionne-les-communications-5g
+11. RadioPlanner 3.0 RF Planning Tool - Wireless Planning Software, consulté le février 18, 2026, https://www.wireless-planning.com/radioplanner
+12. Comparison of Okumura, Hata and COST-231 Models on the Basis of Path Loss and Signal Strength - International Journal of Computer Applications, consulté le février 18, 2026, https://research.ijcaonline.org/volume59/number11/pxc3884216.pdf
+13. Atoll 5G NR Network Planning Software | Forsk, consulté le février 18, 2026, https://www.forsk.com/4g5g
+14. Comparative Analysis of Path Loss Propagation Models in Radio Communication - SciSpace, consulté le février 18, 2026, https://scispace.com/pdf/comparative-analysis-of-path-losspropagation-models-in-radio-2tqw9ii1xy.pdf
+15. COMPARATIVE ANALYSIS OF OKUMURA-HATA AND COST 231 ..., consulté le février 18, 2026, http://103.133.167.5:8080/bitstream/handle/123456789/2484/Eliza%20_Khatun.pdf?sequence=1&isAllowed=y
+16. Overview of 3GPP Release 19 Study on Channel Modeling Enhancements to TR 38.901 for 6G - arXiv.org, consulté le février 18, 2026, https://arxiv.org/html/2507.19266v2
+17. Specification # 38.901 - 3GPP, consulté le février 18, 2026, https://www.3gpp.org/dynareport/38901.htm
+18. Propagation — Model Library - ns-3, consulté le février 18, 2026, https://www.nsnam.org/docs/release/3.38/models/html/propagation.html
+19. 3GPP - TR38901 - Table 7.4.1-1 - Pathloss-Models | PDF - Scribd, consulté le février 18, 2026, https://www.scribd.com/document/631930112/3GPP-TR38901-Table-7-4-1-1-Pathloss-models
+20. Atoll Radio Planning Software Overview (RF Planning and Optimisation), consulté le février 18, 2026, https://teleres.com.au/products/atoll/
+21. Experimental Study of Fog and Suspended Water Effects on the 5G Millimeter Wave Communication Channel - MDPI, consulté le février 18, 2026, https://www.mdpi.com/2079-9292/9/5/720
+22. Impact of Rainfall on 5G Millimeter Wave Channels - ResearchGate, consulté le février 18, 2026, https://www.researchgate.net/publication/384335818_Impact_of_Rainfall_on_5G_Millimeter_Wave_Channels
+23. Impact of Rainfall on 5G Millimeter Wave Channels - PIER Journals, consulté le février 18, 2026, https://www.jpier.org/ac_api/download.php?id=24052501
+24. Que faut-il pour empêcher la pluie et la neige de s'accumuler sur le cache de l'antenne 5G, consulté le février 18, 2026, https://keytech.ntt-at.com/fr/environ/prd_40020.html
+25. Weissberger's model - Wikipedia, consulté le février 18, 2026, https://en.wikipedia.org/wiki/Weissberger%27s_model
+26. Comparative analysis of Weissberger foliage path loss model optimization methods for a 3G network, consulté le février 18, 2026, http://www.imjst.org/wp-content/uploads/2018/12/IMJSTP29120120.pdf
+27. RECOMMENDATION ITU-R P.833-9 – Attenuation in vegetation, consulté le février 18, 2026, https://www.itu.int/dms_pubrec/itu-r/rec/p/R-REC-P.833-9-201609-S!!PDF-E.pdf
+28. RECOMMENDATION ITU-R P.833-10 - Attenuation in vegetation, consulté le février 18, 2026, https://www.itu.int/dms_pubrec/itu-r/rec/p/R-REC-P.833-10-202109-I!!PDF-E.pdf
+29. Evaluating Vegetation Attenuation Characteristics at the 300-GHz Band - IEEE Xplore, consulté le février 18, 2026, https://ieeexplore.ieee.org/iel8/8566058/10938730/10892210.pdf
+30. Network-Scale Impact of Vegetation Loss on Coverage and Exposure for 5G Networks | UU Research Portal, consulté le février 18, 2026, https://research-portal.uu.nl/ws/files/255762050/Network-Scale_Impact_of_Vegetation_Loss_on_Coverage_and_Exposure_for_5G_Networks.pdf
+31. RSRP, RSRQ, SINR Explained: Mobile Signal Metrics Guide | Blog, consulté le février 18, 2026, https://simology.io/blog/coverage-metrics-decoded-rsrp-rsrq-sinr-plain-english
+32. Cahier des charges commun des opérateurs mobile en France métropolitaine pour l'installation de systèmes DAS dans le - Particuliers, consulté le février 18, 2026, https://static.s-sfr.fr/media/site_sfr_business/cdc_das_4op_vf_clean_4op_du_31_mars_22.pdf
+33. Signal strength measure RSRP, RSRQ and SINR Reference for LTE & 5G Cheat Sheet, consulté le février 18, 2026, https://poynting.tech/articles/antenna-faq/signal-strength-measure-rsrp-rsrq-and-sinr-reference-for-lte-cheat-sheet/
+34. What is RSSI, SINR, RSRP, RSRQ? How does this affect signal quality?, consulté le février 18, 2026, https://rangeful.com/what-is-rssi-sinr-rsrp-rsrq-how-does-this-affect-signal-quality/
+35. Atoll Radio Frequency Planning & Optimisation Software - Forsk, consulté le février 18, 2026, https://www.forsk.com/atoll-overview
+36. Wireless Planning Software | MLinkPlanner | RadioPlanner |Antenna Pattern Editor, consulté le février 18, 2026, https://www.wireless-planning.com/
+37. 100+ Opensource 5G project's that you can get your hands dirty with. | by Ramkumar | Medium, consulté le février 18, 2026, https://medium.com/@googler_ram/100-opensource-5g-projects-that-you-can-get-your-hands-dirty-with-127a50967692
+38. 4G/5G Networks Software – Colosseum: The Open RAN Digital Twin, consulté le février 18, 2026, https://colosseum.sites.northeastern.edu/4g-5g-networks-software/
+39. Python Simulator for Integrated Modelling of 5G (pysim5g) - GitHub, consulté le février 18, 2026, https://github.com/edwardoughton/pysim5g
+40. Cahier des charges : comment le rédiger + modèle (8 étapes) - Blog Gestion de projet, consulté le février 18, 2026, https://blog-gestion-de-projet.com/cahier-des-charges-projet/
+41. Exemple de cahier des charges pour un projet simple - Manager GO!, consulté le février 18, 2026, https://www.manager-go.com/gestion-de-projet/dossiers-methodes/elaborer-un-cdc
+42. 5G - Banque des territoires, consulté le février 18, 2026, https://www.banquedesterritoires.fr/sites/default/files/2020-08/Guide_5Gpourlesterritoires_webVF.pdf
+43. Étude d'ingénierie 3G 4G 5G - Décimale, consulté le février 18, 2026, https://www.decimale.net/services-decimale/etude-ingenierie-2g-3g-4g/
+44. LTE Radio Planning Using Atoll Radio Planning and Optimization Software - ResearchGate, consulté le février 18, 2026, https://www.researchgate.net/publication/317032936_LTE_Radio_Planning_Using_Atoll_Radio_Planning_and_Optimization_Software
+45. Déploiement de la 5G en France et dans le monde : aspects techniques et sanitaires, consulté le février 18, 2026, https://igas.gouv.fr/sites/igas/files/2024-04/D%C3%A9ploiement%20de%20la%205G%20en%20France%20et%20dans%20le%20monde%20-%20aspects%20techniques%20et%20sanitaires.pdf
+46. Qu'est-ce que l'architecture de réseau 5G ? | Digi International, consulté le février 18, 2026, https://fr.digi.com/blog/post/5g-network-architecture
+47. Forsk: A Complete RAN Planning& Optimisation Software Solution for Mobile Operators and Private Networks, consulté le février 18, 2026, https://www.forsk.com/
+48. cahier des charges - Organisation internationale de la Francophonie, consulté le février 18, 2026, https://www.francophonie.org/sites/default/files/2020-07/A09_2020-Clauses%20g%C3%A9n%C3%A9rales%2C%20particuli%C3%A8res%20et%20cahier%20des%20charges.pdf
+49. Rapport sur la 5G et les réseaux de communications mobiles - Académie des sciences, consulté le février 18, 2026, https://www.academie-sciences.fr/pdf/rapport/2021_07_12_rapport_5G.pdf

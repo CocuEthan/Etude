@@ -1,0 +1,68 @@
+﻿reprendre les données pour calculer les angles (Azimuth), inclinaison (Tilt), topologie, Puissance d'émission (EIRP, Polarisation, Largeur de bande, Largeur de faisceau, Configuration d'antenne, Gain d'antenne, Infrastructure
+
+
+implémenter et choisir le bon modèle de propagation
+ssh : eliot@194.57.103.203
+mdp : 5Liot$$2025
+
+
+
+
+Cahier des charges:
+
+
+
+
+________________
+
+
+Projet : Analyse de la couverture d’une antenne 4G / 5G
+Objectif
+Analyser et modéliser la forme de couverture radio d’une antenne en fonction de ses paramètres techniques et de son environnement.
+Paramètres à prendre en compte
+* Azimut
+
+* Inclinaison (Tilt)
+
+* Puissance d’émission (EIRP)
+
+* Gain d’antenne
+
+* Largeur de faisceau
+
+* Polarisation
+
+* Largeur de bande
+
+* Configuration d’antenne (MIMO)
+
+* Hauteur d’antenne
+
+* Type d’infrastructure
+
+* Type d’environnement (urbain, rural, etc.)
+
+Fonctionnalités attendues
+   * Calcul de la perte de propagation
+
+   * Implémentation d’un modèle de propagation adapté
+
+   * Calcul de la puissance reçue
+
+   * Génération d’une carte de couverture
+
+   * Visualisation 2D simple
+
+Contraintes
+      * Code structuré et modulaire
+
+      * Paramètres facilement modifiables
+
+      * Résultats cohérents physiquement
+
+Livrables
+         * Script de simulation
+
+         * Visualisation graphique de la couverture
+
+         * Documentation courte expliquant les choix techniques

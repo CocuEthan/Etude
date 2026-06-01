@@ -1,0 +1,20 @@
+Histoire des technologie: datafile > relationnel db> data dashbord > big data > cloud >lakehouse
+
+
+Operationel data system
+relationnal sql: sql de base
+Nosql: pas de notion de table, ni de structure, sous forme d'objet. 
+NewSQL
+analitics datat system:
+source> etl/elt> Warehouse/lake > bi&analytics
+
+différence entre Warehouse lakehouse et lake
+
+data foundation in the genAi era
+architecture médaillon
+data mesh
+
+gen ai
+
+classical ai
+generative ai

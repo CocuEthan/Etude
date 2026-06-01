@@ -1,0 +1,165 @@
+---
+title: "Modèles de régression pour l'ozone"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    runtime: shiny
+---
+
+```{r global, include=FALSE}
+library(shiny)
+library(flexdashboard)
+library(DT)
+lien<-"C:\Users\cocue\Documents\Fac\803\Data"
+df<-read.table(paste0(lien,"/ozone.txt"))
+cc <- cor(df[,1:11]) #corrélation entre variables continues
+#représentation de la matrice des corrélation avec le pckage corrplot
+mat.cor <- corrplot::corrplot(cc)
+library(ggplot2)
+gg.H <- ggplot(df)+aes(x=maxO3)+geom_histogram(bins = 10)
+library(plotly)
+pl.H <- ggplotly(gg.H)
+library(rAmCharts)
+am.H <- amHist(df$maxO3)
+mod <- lm(maxO3~.,data=df)
+res <- rstudent(mod)
+y.fitted <- mod$fitted.values
+df1 <- data.frame(maxO3=df$maxO3,r.student=res)
+Ggg <- ggplot(df1)+aes(x=maxO3,y=res)+geom_point()+geom_smooth(method="lm")
+Gggp <- ggplotly(Ggg)
+Gggp
+```
+
+# Statistique descriptive
+
+## Column{data-width="500"}
+
+### Données
+
+```{r}
+DT::datatable(df, options=list(pageLength=25))
+```
+
+## Column{data-width="500"}
+
+### Correlation matrix
+
+```{r}
+corrplot::corrplot(cc)
+```
+
+### Histogram
+
+```{r}
+amHist(df$maxO3)
+```
+
+# Modèles linéaires simple
+
+## Column{data-width="100"}
+
+```{r}
+radioButtons("variable1",
+label="Choisir la variable explicative",
+choices=names(df)[-c(1,12,13)],
+selected=list("T9"))
+```
+
+## Column{data-width="900"}
+
+### Résumé du modèle
+
+```{r}
+mod1 <- reactive({
+XX <- paste(input$variable1,collapse="+")
+form <- paste("maxO3~",XX,sep="") %>% formula()
+lm(form, data=df)
+})
+renderDT(summary(mod1())$coefficients %>% round(3) %>% as.data.frame(),
+         options=list(dom='t'))
+```
+
+### Nuage de points et ajustement linéaire
+
+```{r}
+renderPlotly({
+(ggplot(df)+aes(x=!!as.name(input$variable1),y=maxO3)+
+  geom_point()+geom_smooth(method="lm"))
+})
+```
+
+### Graphe des résidus
+
+```{r}
+renderPlotly({
+(ggplot(df)+aes(x=mod1()$fitted.values,y=rstudent(mod1()))+
+  geom_point()+geom_smooth(method="loess")+scale_x_continuous(name="Fitted values")+
+scale_y_continuous(name="Studentized residuals"))
+})
+```
+
+# Modèle linéaire complet
+
+## Column{data-width="500"}
+
+### Résumé du modèle
+
+```{r}
+sum.mod <- summary(mod)$coefficients %>% round(3) %>% as.data.frame()
+DT::datatable(sum.mod, list(pageLength=25))
+```
+
+## Column{data-width="500"}
+
+### Graphe des résidus studentisés
+
+```{r}
+ggplot(df)+aes(x=y.fitted,y=res)+
+geom_point()+geom_smooth(method="loess")+scale_x_continuous(name="Fitted values")+
+scale_y_continuous(name="Studentized residuals") 
+```
+
+# Choisir un modèle
+
+## Column{data-width="100"}
+
+```{r}
+checkboxGroupInput("variable",
+label="Choisir la variable",
+choices=names(df)[-1],
+selected=list("T9"))
+```
+
+## Column{data-width="900"}
+
+### Résumé du modèle
+
+```{r}
+mod2 <- reactive({
+XX <- paste(input$variable,collapse="+")
+form <- paste("maxO3~",XX,sep="") %>% formula()
+lm(form, data=df)
+})
+renderDT(summary(mod2())$coefficients %>% round(3) %>% as.data.frame(),
+         options=list(dom='t'))
+```
+
+
+### Résulats du test de Fisher
+
+```{r}
+renderDT(anova(mod2()) %>% round(3) %>% as.data.frame(),
+         options=list(dom='t'))
+```
+
+
+### Graphe des résidus
+
+```{r}
+renderPlotly({
+(ggplot(df)+aes(x=mod2()$fitted.values,y=rstudent(mod2()))+
+  geom_point()+geom_smooth(method="loess")+scale_x_continuous(name="Fitted values")+
+scale_y_continuous(name="Studentized residuals"))
+})
+```

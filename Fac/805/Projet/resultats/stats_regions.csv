@@ -1,0 +1,14 @@
+﻿code_region;nom_region;nb_departements;nb_segments_nc;longueur_nc_km;longueur_moy_m;longueur_med_m;longueur_total_km;pct_non_couvert
+11;Île-de-France;8;62;2.21;35.6;1.3;5054.57;0.04
+24;Centre-Val de Loire;6;158;32.28;204.3;33.0;6958.95;0.46
+27;Bourgogne-Franche-Comté;8;289;39.65;137.2;32.9;7711.77;0.51
+28;Normandie;5;124;19.13;154.2;27.4;7090.44;0.27
+32;Hauts-de-France;5;308;54.14;175.8;47.3;9215.54;0.59
+44;Grand Est;10;1012;249.53;246.6;59.2;11880.91;2.1
+52;Pays de la Loire;5;42;2.3;54.8;9.2;7145.24;0.03
+53;Bretagne;4;175;20.0;114.3;37.5;6242.51;0.32
+75;Nouvelle-Aquitaine;12;516;113.41;219.8;31.6;12903.14;0.88
+76;Occitanie;13;597;99.48;166.6;33.8;11107.4;0.9
+84;Auvergne-Rhône-Alpes;12;738;105.31;142.7;37.2;12963.46;0.81
+93;Provence-Alpes-Côte d'Azur;6;407;51.55;126.7;36.0;5992.45;0.86
+94;Corse;2;28;2.7;96.3;42.2;635.67;0.42

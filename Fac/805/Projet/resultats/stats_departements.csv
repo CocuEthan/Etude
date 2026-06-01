@@ -1,0 +1,94 @@
+﻿code_dept;nom_dept;code_region;nom_region;nb_segments_nc;longueur_nc_km;longueur_moy_m;longueur_med_m;longueur_total_km;pct_non_couvert
+01;Ain;84;Auvergne-Rhône-Alpes;410;33.68;82.1;38.9;1369.09;2.46
+02;Aisne;32;Hauts-de-France;31;4.07;131.2;48.8;1407.91;0.29
+03;Allier;84;Auvergne-Rhône-Alpes;17;0.47;27.8;33.9;1288.94;0.04
+04;Alpes-de-Haute-Provence;93;Provence-Alpes-Côte d'Azur;32;13.81;431.6;43.8;669.27;2.06
+05;Hautes-Alpes;93;Provence-Alpes-Côte d'Azur;44;6.24;141.8;28.8;514.86;1.21
+06;Alpes-Maritimes;93;Provence-Alpes-Côte d'Azur;189;13.71;72.6;35.0;808.38;1.7
+07;Ardèche;84;Auvergne-Rhône-Alpes;47;5.99;127.5;28.0;605.44;0.99
+08;Ardennes;44;Grand Est;120;47.83;398.6;41.4;860.83;5.56
+09;Ariège;76;Occitanie;5;2.5;500.4;49.4;416.48;0.6
+10;Aube;44;Grand Est;15;1.71;114.1;55.1;1130.06;0.15
+11;Aude;76;Occitanie;31;3.62;116.8;16.9;912.81;0.4
+12;Aveyron;76;Occitanie;98;9.99;101.9;21.7;983.36;1.02
+13;Bouches-du-Rhône;93;Provence-Alpes-Côte d'Azur;55;4.0;72.8;33.7;1923.28;0.21
+14;Calvados;28;Normandie;18;3.08;171.1;48.3;1426.19;0.22
+15;Cantal;84;Auvergne-Rhône-Alpes;38;7.26;191.0;27.7;552.58;1.31
+16;Charente;75;Nouvelle-Aquitaine;2;0.79;396.4;396.4;783.51;0.1
+17;Charente-Maritime;75;Nouvelle-Aquitaine;16;4.17;260.7;0.0;1485.97;0.28
+18;Cher;24;Centre-Val de Loire;51;19.48;381.9;60.1;1037.79;1.88
+19;Corrèze;75;Nouvelle-Aquitaine;67;10.17;151.8;20.3;922.68;1.1
+21;Côte-d'Or;27;Bourgogne-Franche-Comté;46;7.97;173.3;42.3;1695.41;0.47
+22;Côtes-d'Armor;53;Bretagne;41;3.68;89.8;37.6;1387.64;0.27
+23;Creuse;75;Nouvelle-Aquitaine;21;1.64;77.9;7.2;510.68;0.32
+24;Dordogne;75;Nouvelle-Aquitaine;33;5.38;162.9;42.7;1199.36;0.45
+25;Doubs;27;Bourgogne-Franche-Comté;61;4.56;74.8;33.5;953.86;0.48
+26;Drôme;84;Auvergne-Rhône-Alpes;6;1.51;252.0;118.8;952.76;0.16
+27;Eure;28;Normandie;18;0.27;14.7;3.0;1476.62;0.02
+28;Eure-et-Loir;24;Centre-Val de Loire;7;0.21;30.7;30.3;1059.35;0.02
+29;Finistère;53;Bretagne;65;5.05;77.7;31.8;1625.74;0.31
+2A;Corse-du-Sud;94;Corse;20;1.82;91.0;48.0;293.85;0.62
+2B;Haute-Corse;94;Corse;8;0.87;109.4;34.9;341.82;0.25
+30;Gard;76;Occitanie;11;0.53;47.8;32.0;1017.81;0.05
+31;Haute-Garonne;76;Occitanie;24;3.49;145.4;70.2;1444.09;0.24
+32;Gers;76;Occitanie;11;1.42;129.0;26.1;605.98;0.23
+33;Gironde;75;Nouvelle-Aquitaine;26;1.05;40.5;9.3;1889.53;0.06
+34;Hérault;76;Occitanie;43;2.78;64.7;22.5;1548.32;0.18
+35;Ille-et-Vilaine;53;Bretagne;34;8.27;243.1;65.2;1871.92;0.44
+36;Indre;24;Centre-Val de Loire;42;5.14;122.4;38.7;839.41;0.61
+37;Indre-et-Loire;24;Centre-Val de Loire;27;4.35;161.0;0.0;1417.2;0.31
+38;Isère;84;Auvergne-Rhône-Alpes;16;0.77;47.9;8.5;1671.69;0.05
+39;Jura;27;Bourgogne-Franche-Comté;46;3.09;67.2;23.4;902.97;0.34
+40;Landes;75;Nouvelle-Aquitaine;32;1.18;36.8;12.3;1171.91;0.1
+41;Loir-et-Cher;24;Centre-Val de Loire;22;2.77;125.7;43.5;1107.8;0.25
+42;Loire;84;Auvergne-Rhône-Alpes;25;6.08;243.2;86.2;980.97;0.62
+43;Haute-Loire;84;Auvergne-Rhône-Alpes;16;1.39;86.7;30.7;628.24;0.22
+44;Loire-Atlantique;52;Pays de la Loire;5;0.12;24.1;22.6;1818.33;0.01
+45;Loiret;24;Centre-Val de Loire;9;0.34;38.0;17.3;1497.4;0.02
+46;Lot;76;Occitanie;57;3.68;64.6;22.2;924.89;0.4
+47;Lot-et-Garonne;75;Nouvelle-Aquitaine;38;7.26;191.0;6.4;854.5;0.85
+48;Lozère;76;Occitanie;132;37.52;284.2;76.3;372.78;10.06
+49;Maine-et-Loire;52;Pays de la Loire;10;0.08;7.9;0.0;1596.09;0.01
+50;Manche;28;Normandie;30;2.89;96.3;26.6;1186.23;0.24
+51;Marne;44;Grand Est;16;0.34;21.2;10.9;1654.09;0.02
+52;Haute-Marne;44;Grand Est;43;8.26;192.1;9.1;900.93;0.92
+53;Mayenne;52;Pays de la Loire;9;0.11;12.7;0.0;725.1;0.02
+54;Meurthe-et-Moselle;44;Grand Est;86;9.08;105.6;58.4;1231.96;0.74
+55;Meuse;44;Grand Est;39;13.09;335.7;42.2;985.87;1.33
+56;Morbihan;53;Bretagne;35;3.0;85.8;34.7;1357.21;0.22
+57;Moselle;44;Grand Est;317;67.15;211.8;62.2;1765.09;3.8
+58;Nièvre;27;Bourgogne-Franche-Comté;16;1.73;108.1;22.2;638.43;0.27
+59;Nord;32;Hauts-de-France;211;43.52;206.3;59.7;2395.71;1.82
+60;Oise;32;Hauts-de-France;16;0.55;34.4;1.3;1447.05;0.04
+61;Orne;28;Normandie;30;9.7;323.3;55.1;1242.41;0.78
+62;Pas-de-Calais;32;Hauts-de-France;45;5.54;123.2;27.8;2352.56;0.24
+63;Puy-de-Dôme;84;Auvergne-Rhône-Alpes;44;4.48;101.7;45.3;1184.86;0.38
+64;Pyrénées-Atlantiques;75;Nouvelle-Aquitaine;226;78.09;345.5;45.6;1145.4;6.82
+65;Hautes-Pyrénées;76;Occitanie;25;7.84;313.7;32.6;529.77;1.48
+66;Pyrénées-Orientales;76;Occitanie;119;20.4;171.4;29.8;915.09;2.23
+67;Bas-Rhin;44;Grand Est;115;11.55;100.4;51.9;1272.02;0.91
+68;Haut-Rhin;44;Grand Est;233;86.94;373.1;105.1;974.78;8.92
+69;Rhône;84;Auvergne-Rhône-Alpes;14;0.52;37.4;12.3;1448.6;0.04
+70;Haute-Saône;27;Bourgogne-Franche-Comté;23;3.33;144.8;5.0;709.69;0.47
+71;Saône-et-Loire;27;Bourgogne-Franche-Comté;27;3.54;131.1;63.0;1486.48;0.24
+72;Sarthe;52;Pays de la Loire;6;0.2;32.8;10.8;1250.88;0.02
+73;Savoie;84;Auvergne-Rhône-Alpes;47;34.69;738.1;121.1;1094.03;3.17
+74;Haute-Savoie;84;Auvergne-Rhône-Alpes;58;8.47;146.1;35.1;1186.26;0.71
+76;Seine-Maritime;28;Normandie;28;3.19;114.0;24.3;1758.99;0.18
+77;Seine-et-Marne;11;Île-de-France;29;1.05;36.2;0.0;2042.16;0.05
+78;Yvelines;11;Île-de-France;12;0.42;34.6;30.1;1300.15;0.03
+79;Deux-Sèvres;75;Nouvelle-Aquitaine;13;0.87;66.6;28.9;1129.35;0.08
+80;Somme;32;Hauts-de-France;5;0.45;90.3;0.0;1612.31;0.03
+81;Tarn;76;Occitanie;16;3.71;231.6;16.8;732.61;0.51
+82;Tarn-et-Garonne;76;Occitanie;25;2.0;80.0;22.5;703.41;0.28
+83;Var;93;Provence-Alpes-Côte d'Azur;86;13.79;160.3;49.8;1359.32;1.01
+84;Vaucluse;93;Provence-Alpes-Côte d'Azur;1;0.0;0.0;0.0;717.34;0.0
+85;Vendée;52;Pays de la Loire;12;1.79;149.2;60.8;1754.84;0.1
+86;Vienne;75;Nouvelle-Aquitaine;12;1.29;107.6;24.5;1007.07;0.13
+87;Haute-Vienne;75;Nouvelle-Aquitaine;30;1.52;50.7;15.0;803.18;0.19
+88;Vosges;44;Grand Est;28;3.58;127.9;45.5;1105.28;0.32
+89;Yonne;27;Bourgogne-Franche-Comté;27;6.94;257.1;32.1;1144.92;0.61
+90;Territoire de Belfort;27;Bourgogne-Franche-Comté;43;8.49;197.5;96.2;180.01;4.72
+91;Essonne;11;Île-de-France;3;0.02;8.1;0.0;955.44;0.0
+92;Hauts-de-Seine;11;Île-de-France;5;0.0;0.9;0.0;392.9;0.0
+94;Val-de-Marne;11;Île-de-France;13;0.72;55.0;21.0;363.92;0.2

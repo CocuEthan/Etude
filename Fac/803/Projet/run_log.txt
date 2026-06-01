@@ -1,0 +1,17 @@
+﻿Rscript.exe : 
+Au caractère Ligne:1 : 1
++ & "C:\Program Files\R\R-4.5.2\bin\Rscript.exe" "C:\Users\cocue\Docume ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Attachement du package : 'dplyr'
+
+Les objets suivants sont masqués depuis 'package:stats':
+
+    filter, lag
+
+Les objets suivants sont masqués depuis 'package:base':
+
+    intersect, setdiff, setequal, union
+
